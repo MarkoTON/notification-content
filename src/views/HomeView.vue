@@ -1,15 +1,10 @@
 <template>
-  <div class="home grid pt-3">
+  <div class="home grid pt-3" v-if="!loading">
     <div class="col-6 offset-3 pb-3">
       <Form :usersForm="usersFormData" @submit-form="updateUser"></Form>
     </div>
     <div class="col-6 offset-3">
-      <div v-if="loading">
-        Loading data...
-      </div>
-      <div v-else>
-        <UsersTable :usersTable="usersData"></UsersTable>
-      </div>
+      <UsersTable :usersTable="usersData"></UsersTable>
     </div>
   </div>
 </template>
@@ -60,10 +55,10 @@ export default {
             email: item.email,
             name: item.name,
             notification: [
-              ...item.notification,
-              {
-                title: formData.title, type: formData.type, content: formData.content
-              }
+            ...item.notification,
+            {
+              title: formData.title, type: formData.type, content: formData.content
+            }
             ]
           }
         } else {
@@ -85,28 +80,26 @@ export default {
   },
   created() {
     this.loadFromLocalStorage();
-
+    
     if (!this.users.length) {
       axios
-        .get(`https://jsonplaceholder.typicode.com/users`)
-        .then((response) => {
-          this.users = response.data.map(user => ({
-            id: user.id,
-            username: user.username,
-            name: user.name,
-            email: user.email,
-            notification: []
-          }));
-          this.saveToLocalStorage(); 
-          this.loading = false;
-        })
-        .catch((e) => {
-          this.errors.push(e);
-          this.loading = false;
-        });
+      .get(`https://jsonplaceholder.typicode.com/users`)
+      .then((response) => {
+        this.users = response.data.map(user => ({
+          id: user.id,
+          username: user.username,
+          name: user.name,
+          email: user.email,
+          notification: []
+        }));
+        this.saveToLocalStorage(); 
+        this.loading = false;
+      })
+      .catch((e) => {
+        this.errors.push(e);
+        this.loading = false;
+      });
     }
   },
 };
 </script>
-
-  

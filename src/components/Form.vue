@@ -25,10 +25,10 @@
     </div>
     <div>
       <label for="messageType">Type of Message:</label>
-      <select id="messageType" v-model="formData.messageType" required>
+      <select id="messageType" v-model="formData.type" required>
         <option value="info">Info</option>
-        <option value="info1">Replay</option>
-        <option value="info2">Comment</option>
+        <option value="replay">Replay</option>
+        <option value="comment">Comment</option>
       </select>
     </div>
     <div>

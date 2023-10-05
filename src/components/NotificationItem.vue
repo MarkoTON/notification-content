@@ -1,11 +1,21 @@
 <template>
   <div class="alert">
-    <div class="alert-item">
-      <div :class="data.type === 'info2' ? 'info2' : 'info1'"></div>
-        <span>{{ data.title }}</span>
-      {{ data.type }}
+    <div class="alert-content">
+      <div class="alert-item">
+        <div :class="{ 'info': data.type === 'info', 'warning': data.type === 'replay', 'danger': data.type === 'comment' }"></div>
+        <p v-if="data.type === 'info'">
+          <span>Info:</span>
+        </p>
+        <p v-else-if="data.type === 'replay'">
+          <span>Replay:</span>
+        </p>
+        <p v-else>
+          <span>Comment:</span>
+        </p>
+        <h5>{{ data.title | textLimit30 }}</h5>
+      </div>
+      <font-awesome-icon icon="times" @click="removeNotification(itemIndex)" />
     </div>
-    <div class="brake-line"></div>
   </div>
 </template>
 
@@ -15,6 +25,9 @@ export default {
   props: {
     data: {
       type: Object
+    },
+    itemIndex: {
+      type: Number
     }
   },
   data(){
@@ -22,18 +35,15 @@ export default {
 
     }
   },
+  watch:{
+  },
   methods: {
-    getAlertColor(type) {
-      console.log(type)
-      switch (type) {
-        case 'info':
-          return 'info'; // Postavite boju za info type
-        case 'info1':
-          return 'info1'; // Postavite boju za replay type
-        case 'info2':
-          return 'info2'; // Postavite boju za comment type
-      }
+    removeNotification(itemIndex){
+      this.$emit('removeFromList', itemIndex);
     }
+  },
+  created(){
+    console.log(this.data)
   }
 }
 </script>
@@ -42,25 +52,31 @@ export default {
 .alert {
   width: 350px;
 
-  .brake-line {
-    height: 1px;
-    background: #e1e1e1;
+  .alert-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
   }
   .alert-item {
     display: flex;
     align-items: center;
 
+    h5 {
+      padding-left: 5px;
+    }
+    
     .info {
       background: green;
     }
-    .info1 {
+    .warning {
       background: yellow;
     }
-    .info2 {
+    .danger {
       background: red;
     }
   
-    .info, .info1, .info2 {
+    .info, .warning, .danger {
       width: 8px;
       height: 8px;
       margin-right: 5px;

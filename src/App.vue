@@ -1,9 +1,5 @@
 <template>
   <div id="app">
-    <!-- <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/user">User</router-link>
-    </nav> -->
     <router-view/>
   </div>
 </template>
@@ -15,15 +11,15 @@
   padding: 0;
 }
 
+$grid-columns: 12;  
+$grid-gap: 20px;   
+
 .pb-3 {
   padding-bottom: 1rem;
 }
 .pt-3 {
   padding-top: 1rem;
 }
-
-$grid-columns: 12;  
-$grid-gap: 20px;    
 
 
 .grid {

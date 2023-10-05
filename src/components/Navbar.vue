@@ -5,11 +5,11 @@
       <a href="#"><font-awesome-icon icon="envelope" /></a>
       <a href="#" @click="showDropdown">
         <font-awesome-icon icon="bell"/>
-        <span class="badge" v-if="notification.length">{{notification.length}}</span>
+        <span class="badge" v-if="localNotification.length">{{localNotification.length}}</span>
         <div class="dropdown" v-if="isDropdownVisible">
           <ul class="dropdown-list">
-            <li v-for="(item, index) in notification" :key="index">
-              <notification-item :data="item"></notification-item>  
+            <li v-for="(item, index) in localNotification" :key="index">
+              <notification-item @removeFromList="refreshList" :data="item" :itemIndex="index"></notification-item>  
             </li>
           </ul>
         </div>
@@ -36,7 +36,8 @@ export default {
   },
   data() {
     return {
-      isDropdownVisible: false
+      isDropdownVisible: false,
+      localNotification: this.notification
     };
   },
   methods: {
@@ -45,6 +46,11 @@ export default {
     },
     hideDropdown() {
       this.isDropdownVisible = false;
+    },
+    refreshList(id){
+      this.localNotification = this.localNotification.filter((item,index) => {
+        return index !== id
+      } )
     }
   }
 };
@@ -55,10 +61,10 @@ $nav-bg-color: #efefef;
 $nav-text-color: #0e0e0e;
 $nav-link-hover-color: #0056b3;
 $nav-link-padding: 10px 15px;
-$badge-bg-color: #007bff;    // Boja pozadine za badge
-$badge-text-color: #fff;     // Boja teksta za badge
-$badge-padding: 3px 6px;    // Padding za badge
-$badge-border-radius: 12px; // Radijus zaobljenja za badge
+$badge-bg-color: #007bff;    
+$badge-text-color: #fff;    
+$badge-padding: 3px 6px;   
+$badge-border-radius: 12px;
 
 nav {
   background-color: $nav-bg-color;
@@ -75,7 +81,7 @@ nav {
     color: $badge-text-color;
     padding: $badge-padding;
     border-radius: $badge-border-radius;
-    font-size: 0.75rem; // Prilagodite veličinu fonta prema potrebi
+    font-size: 0.75rem; 
   }
   
   .dropdown {
@@ -110,6 +116,8 @@ nav {
     margin: 0;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
+    
+  border-bottom: 1px solid #e0e0e0;
   }
   
   .dropdown li:hover {

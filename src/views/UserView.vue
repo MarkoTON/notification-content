@@ -1,13 +1,14 @@
 <template>
-  <div class="user col">
+  <div class="user">
     <Navbar :logo="randomImage" :notification="notificationData"></Navbar>
-    <UserInfo :userData="user[0]" :logo="randomImage"></UserInfo>
+    <div class="col-4 offset-4">
+      <UserInfo :userData="user[0]" :logo="randomImage"></UserInfo>
+    </div>
   </div>
 </template>
 
 <script>
 import UserInfo from '@/components/UserInfo.vue';
-import NotificationView from '@/views/NotificationView.vue';
 import Navbar from '@/components/Navbar.vue';
 import axios from 'axios';
 
@@ -22,7 +23,6 @@ export default {
   },
   components: {
     UserInfo,
-    NotificationView,
     Navbar
   },
   watch: {
