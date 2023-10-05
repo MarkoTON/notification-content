@@ -75,6 +75,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$bg-white: #fff;
 $form-bg-color: #f8f9fa;         // Boja pozadine forme
 $form-border-color: #dee2e6;     // Boja okvira forme
 $form-font-family: Arial, sans-serif; // Font za tekst u formi
@@ -99,6 +100,23 @@ $form-font-family: Arial, sans-serif; // Font za tekst u formi
     margin-bottom: 10px;
     border: 1px solid $form-border-color;
     border-radius: 4px;
+  }
+
+  ul {
+    background: $bg-white;
+    border: 1px solid $form-border-color;
+    margin-bottom: 0.5rem;
+
+    li {
+      text-decoration: none;
+      padding: 0.5rem;
+      list-style-type: none;
+
+      &:hover {
+        background-color: #e2e6ea; 
+      }
+    }
+
   }
   
   .btn {

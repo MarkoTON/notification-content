@@ -11,9 +11,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(user, index) in usersTableInfo" :key="user.id">
+        <tr  v-for="(user, index) in usersTableInfo" :key="user.id" >
           <th scope="row">{{ index + 1 }}</th>
-          <td>{{ user.username }}</td>
+          <td>
+            <router-link :to="{name: 'User', params: {id: user.id }}">
+              {{ user.username }}
+            </router-link>
+          </td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>
@@ -41,9 +45,7 @@ export default {
   },
   watch: {
     usersTable() {
-      // Ovaj blok koda se izvršava kada se promeni 'count'
       console.log('Nirvana')
-      // this.users = this.usersTable
       this.usersTableInfo
     },
   },
@@ -73,14 +75,14 @@ $table-font-family: Arial, sans-serif;
     vertical-align: top;
     border-top: 1px solid $table-border-color;
   }
-
+  
   thead {
     th {
       background-color: #343a40;  
       color: white;
     }
   }
-
+  
   tbody {
     tr {
       &:hover {
