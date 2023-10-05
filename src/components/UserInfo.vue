@@ -1,32 +1,37 @@
 <template>
   <div class="card">
-    <img src="" alt="user image">
+    <img :src="logo" alt="user image">
     <h3 class="card-title">
-      Marko Canovic 
+      {{profile.name}}
     </h3>
-    <p class="card-body">
+    <div class="card-body">
       <ul>
-        <li>Email</li>
-        <li>Notification numbers</li>
-        <li>Username</li>
+        <li><span>Username:</span> {{ profile.username }}</li>
+        <li><span>Email:</span>{{ profile.email }}</li>
+        <li><span>Notification numbers:</span>{{ profile.notification.length }}</li>
       </ul>
-    </p>
-    {{ profile }}
+    </div>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'UserInfo',
   props: {
     userData: {
-      type: Array,
+      type: Object,
+      require: true
+    },
+    logo: {
+      type: String,
       require: true
     }
   },  
   data(){
     return {
-      profile: this.userData
+      profile: this.userData,
+      randomImage: ''
     }
   }
 }
@@ -41,6 +46,7 @@ export default {
   background-color: #fff;
   margin-bottom: 20px;
   transition: box-shadow 0.2s ease-in-out;
+  display: inline-block;
   
   &:hover {
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
@@ -55,6 +61,15 @@ export default {
   .card-text {
     font-size: 1rem;
     color: #555;
+  }
+  
+  ul {
+    list-style-type: none;
+    li {
+      span {
+        font-weight: 600;
+      }
+    }
   }
   
   .btn {

@@ -1,18 +1,15 @@
 <template>
   <div class="user col">
-    <NotificationView></NotificationView>  
-    <UserInfo :userData="user"></UserInfo>
-    <hr>
-    <p>{{ userID }}</p>
-    <p>{{ user }}</p>
-    <p>{{ randomImage }}</p>
+    <Navbar :logo="randomImage" :notification="notificationData"></Navbar>
+    <UserInfo :userData="user[0]" :logo="randomImage"></UserInfo>
   </div>
 </template>
 
 <script>
 import UserInfo from '@/components/UserInfo.vue';
 import NotificationView from '@/views/NotificationView.vue';
-import axios from 'axios'
+import Navbar from '@/components/Navbar.vue';
+import axios from 'axios';
 
 export default {
   name: 'UserView',
@@ -23,6 +20,19 @@ export default {
       randomImage: undefined
     };
   },
+  components: {
+    UserInfo,
+    NotificationView,
+    Navbar
+  },
+  watch: {
+    $route: 'updateId'
+  },
+  computed:{
+    notificationData(){
+      return this.user[0].notification
+    }
+  },  
   methods: {
     updateId() {
       this.userID = this.$route.params.id;
@@ -36,16 +46,9 @@ export default {
       }
     },
   },
-  watch: {
-    $route: 'updateId'
-  },
   created() {
-    this.loadUsersFromLocalStorage();
     axios.get('https://randomuser.me/api/').then(response => (this.randomImage = response.data.results[0].picture.large))
-  },
-  components: {
-    UserInfo,
-    NotificationView,
-  },
+    this.loadUsersFromLocalStorage();
+  }
 };
 </script>

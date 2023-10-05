@@ -27,8 +27,8 @@
       <label for="messageType">Type of Message:</label>
       <select id="messageType" v-model="formData.messageType" required>
         <option value="info">Info</option>
-        <option value="warning">Warning</option>
-        <option value="error">Error</option>
+        <option value="info1">Replay</option>
+        <option value="info2">Comment</option>
       </select>
     </div>
     <div>
@@ -51,7 +51,7 @@ export default {
         username: '',
         title: '',
         content: '',
-        type: 'info'
+        type: ''
       },
       users: this.usersForm,
       filteredUsers: []
@@ -60,6 +60,12 @@ export default {
   methods: {
     submitForm() {
       this.$emit('submit-form', this.formData);
+      this.formData = {
+        username: '',
+        title: '',
+        content: '',
+        type: ''
+      }
     },
     filterUsers() {
       this.filteredUsers = this.users.filter(user =>
@@ -76,9 +82,9 @@ export default {
 
 <style lang="scss" scoped>
 $bg-white: #fff;
-$form-bg-color: #f8f9fa;         // Boja pozadine forme
-$form-border-color: #dee2e6;     // Boja okvira forme
-$form-font-family: Arial, sans-serif; // Font za tekst u formi
+$form-bg-color: #f8f9fa;         
+$form-border-color: #dee2e6;  
+$form-font-family: Arial, sans-serif; 
 
 .form {
   background-color: $form-bg-color;
