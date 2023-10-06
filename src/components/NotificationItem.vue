@@ -30,20 +30,10 @@ export default {
       type: Number
     }
   },
-  data(){
-    return {
-
-    }
-  },
-  watch:{
-  },
   methods: {
     removeNotification(itemIndex){
       this.$emit('removeFromList', itemIndex);
     }
-  },
-  created(){
-    console.log(this.data)
   }
 }
 </script>

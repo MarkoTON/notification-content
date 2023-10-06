@@ -36,7 +36,6 @@ export default {
   methods: {
     updateId() {
       this.userID = this.$route.params.id;
-      console.log(this.userID);
     },
     loadUsersFromLocalStorage() {
       const savedUsers = localStorage.getItem('users');

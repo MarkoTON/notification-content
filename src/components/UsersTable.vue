@@ -45,7 +45,6 @@ export default {
   },
   watch: {
     usersTable() {
-      console.log('Nirvana')
       this.usersTableInfo
     },
   },
