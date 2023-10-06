@@ -28,21 +28,21 @@ export default {
   },
   computed: {
     usersData() {
-      const newData = this.users.map(user => ({
+      const usersForTable = this.users.map(user => ({
         id: user.id,
         username: user.username,
         name: user.name,
         email: user.email,
         notification: user.notification
       }));
-      return newData;
+      return usersForTable;
     },
     usersFormData() {
-      const newData = this.users.map(user => ({
+      const usersForForm = this.users.map(user => ({
         id: user.id,
         username: user.username
       }));
-      return newData;
+      return usersForForm;
     },
   },
   methods: {

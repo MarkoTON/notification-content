@@ -30,8 +30,7 @@ export default {
   },  
   data(){
     return {
-      profile: this.userData,
-      randomImage: ''
+      profile: this.userData
     }
   }
 }

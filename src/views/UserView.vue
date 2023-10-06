@@ -1,8 +1,8 @@
 <template>
   <div class="user">
-    <Navbar :logo="randomImage" :notification="notificationData"></Navbar>
+    <Navbar :logo="randomAvatar" :notification="notificationData"></Navbar>
     <div class="col-4 offset-4">
-      <UserInfo :userData="user[0]" :logo="randomImage"></UserInfo>
+      <UserInfo :userData="user[0]" :logo="randomAvatar"></UserInfo>
     </div>
   </div>
 </template>
@@ -18,7 +18,7 @@ export default {
     return {
       userID: this.$route.params.id,
       user: [],
-      randomImage: undefined
+      randomAvatar: undefined
     };
   },
   components: {
@@ -46,7 +46,7 @@ export default {
     },
   },
   created() {
-    axios.get('https://randomuser.me/api/').then(response => (this.randomImage = response.data.results[0].picture.large))
+    axios.get('https://randomuser.me/api/').then(response => (this.randomAvatar = response.data.results[0].picture.large))
     this.loadUsersFromLocalStorage();
   }
 };

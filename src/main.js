@@ -7,10 +7,8 @@ import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faEnvelope, faBell, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-// Dodajte ikonice koje želite koristiti u biblioteku
 library.add(faEnvelope, faBell, faUserSecret, faTimes);
 
-// Registrujte komponentu FontAwesomeIcon globalno
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
